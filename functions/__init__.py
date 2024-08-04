@@ -1,0 +1,1 @@
+from functions.for_logs import check_logs_size_and_delete, send_logs_auto

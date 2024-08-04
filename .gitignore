@@ -1,0 +1,10 @@
+__pycache__/config.cpython-311.pyc
+functions/__pycache__/__init__.cpython-311.pyc
+functions/__pycache__/for_logs.cpython-311.pyc
+handlers/__pycache__/__init__.cpython-311.pyc
+handlers/__pycache__/admin.cpython-311.pyc
+handlers/__pycache__/client.cpython-311.pyc
+keyboards/__pycache__/__init__.cpython-311.pyc
+keyboards/__pycache__/admin_kb.cpython-311.pyc
+keyboards/__pycache__/client_kb.cpython-311.pyc
+.env
