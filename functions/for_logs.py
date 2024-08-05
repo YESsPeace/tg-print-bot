@@ -1,9 +1,8 @@
-import logging
 import os
 
 import aiogram.bot as Bot
 
-logger = logging.getLogger(__name__)
+from config import logger
 
 async def send_logs_auto(bot: Bot, admins_ids: tuple | list, exception: Exception, ):
     """

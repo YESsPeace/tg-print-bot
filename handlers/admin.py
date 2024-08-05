@@ -2,14 +2,11 @@ from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from config import dp, bot, admins_ids
+from config import dp, bot, admins_ids, logger
 
 from keyboards import kb_admin
 
 from functions import send_logs_auto
-import logging
-
-logger2 = logging.getLogger(__name__)
 
 
 class FSMAdmin(StatesGroup):
@@ -43,7 +40,7 @@ async def admin_login(message: types.Message, state: FSMContext):
             )
 
     except Exception as e:
-        logger2.error(f"admin_login: {e}")
+        logger.error(f"admin_login: {e}")
         await send_logs_auto(e)
 
 
@@ -62,7 +59,7 @@ async def admin_logout(message: types.Message, state: FSMContext):
         )
 
     except Exception as e:
-        logger2.error(f"admin_logout: {e}")
+        logger.error(f"admin_logout: {e}")
         await send_logs_auto(e)
 
 

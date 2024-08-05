@@ -18,6 +18,8 @@ logging.basicConfig(
     encoding='utf-8'
 )
 
+logger = logging.getLogger(__name__)
+
 admins_ids = (os.getenv('admins_ids')) # tuple[str]
 
 storage = MemoryStorage()

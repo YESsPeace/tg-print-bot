@@ -1,21 +1,46 @@
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from config import dp, bot
+from config import dp, bot, logger
 from keyboards import kb_client
+
+import requests
+
+from functions import send_logs_auto, print_image
 
 
 class FSMClient(StatesGroup):
     pass
 
 
-# TODO: make implementation of the main task - printing
 @dp.message_handler(commands=['start'])
 async def command_start(message: types.Message):
     await message.answer(
         'Привет, я бот, который помогает с печатью. Просто скиньте мне ваши файлы.',
         reply_markup=kb_client
     )
+
+@dp.message_handler(content_types=['photo'])
+async def handle_photo(message: types.Message):
+    try:
+        photo = message.photo[-1]
+
+        # Получаем изображение как байтовый объект
+        file_id = photo.file_id
+
+        image_url = f"https://api.telegram.org/bot{bot._token}/getFile?file_id={file_id}"
+        response = requests.get(image_url)
+        image_path = response.json()['result']['file_path']
+        image_data = requests.get(f"https://api.telegram.org/file/bot{bot._token}/{image_path}").content
+
+        # await bot.send_photo(message.chat.id, photo=image_data)
+
+        await print_image(image=image_data)
+
+    except Exception as e:
+        logger.error(f"handle_photo: {e}")
+        await send_logs_auto(e)
+
 
 
 # TODO: make description about all commands 

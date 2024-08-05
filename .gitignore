@@ -8,3 +8,6 @@ keyboards/__pycache__/__init__.cpython-311.pyc
 keyboards/__pycache__/admin_kb.cpython-311.pyc
 keyboards/__pycache__/client_kb.cpython-311.pyc
 .env
+main_log.log
+.venv
+functions/__pycache__/for_print.cpython-311.pyc
