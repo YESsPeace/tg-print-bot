@@ -82,16 +82,16 @@ async def send_logs_manually(message: types.Message):
                 document=log_file)
 
     except FileNotFoundError as e:
-        logger2.error(f"send_logs_manually: logs file is not found {e}")
+        logger.error(f"send_logs_manually: logs file is not found {e}")
 
         # creating of logs file
         with open('main_log.log', "w"):
             pass
 
-        logger2.info(f"send_logs_manually: logs file created with the name 'main_log.log', because the upper Error {e}")
+        logger.info(f"send_logs_manually: logs file created with the name 'main_log.log', because the upper Error {e}")
 
     except Exception as e:
-        logger2.error(f"send_logs_manually: {e}")
+        logger.error(f"send_logs_manually: {e}")
         await send_logs_auto(e)
 
 def register_handlers_admin(dp: Dispatcher):

@@ -2,9 +2,9 @@ import os
 
 import aiogram.bot as Bot
 
-from config import logger
+from config import logger, bot, admins_ids
 
-async def send_logs_auto(bot: Bot, admins_ids: tuple | list, exception: Exception, ):
+async def send_logs_auto(exception: Exception):
     """
     Автоматически отправляет логги в лс всех админов, при каких-либо ошибках.
     Логги админов храняться в перменой admins_ids в config.py и берутся из переменных окружения.
