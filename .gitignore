@@ -11,3 +11,6 @@ keyboards/__pycache__/client_kb.cpython-311.pyc
 main_log.log
 .venv
 functions/__pycache__/for_print.cpython-311.pyc
+gh_update.py
+update_config.ini
+Запустить бота.bat

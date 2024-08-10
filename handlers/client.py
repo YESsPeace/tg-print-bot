@@ -9,6 +9,7 @@ import requests
 
 from functions import send_logs_auto, print_image
 
+import pickle
 
 class FSMClient(StatesGroup):
     pass
@@ -50,6 +51,9 @@ async def set_color_preset(callback_query: types.CallbackQuery):
     global color_preset
 
     color_preset = bool(int(callback_query.data.split('_')[-1]))
+
+    with open("color_preset.pickle", "wb") as file:
+        pickle.dump(color_preset, file)
 
     await bot.send_message(
         callback_query.from_user.id,

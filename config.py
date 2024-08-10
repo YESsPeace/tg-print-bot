@@ -7,6 +7,8 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from dotenv import load_dotenv
 
+import pickle
+
 load_dotenv()
 
 # настройка базового логгера
@@ -23,7 +25,11 @@ logger = logging.getLogger(__name__)
 admins_ids = (os.getenv('admins_ids')) # tuple[str]
 
 # Глобальная переменная для уточнения цвета печати
-color_preset: None | bool = None  # True - colored, False - B&W
+try:
+    with open("color_preset.pickle", "rb") as file:
+        color_preset: bool = pickle.load(file) # True - colored, False - B&W
+except:
+    color_preset: bool = False # True - colored, False - B&W
 
 storage = MemoryStorage()
 
