@@ -1,3 +1,5 @@
 aiogram==2.25.2
 python-dotenv==1.0.1
 requests==2.32.3
+pillow==10.4.0
+win32printing==0.1.3
