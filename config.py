@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 
 admins_ids = (os.getenv('admins_ids')) # tuple[str]
 
+# Глобальная переменная для уточнения цвета печати
+color_preset: None | bool = None  # True - colored, False - B&W
+
 storage = MemoryStorage()
 
 bot = Bot(token=os.getenv('BOT_TOKEN')) # str
