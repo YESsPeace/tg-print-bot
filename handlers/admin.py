@@ -44,6 +44,7 @@ async def admin_login(message: types.Message, state: FSMContext):
         await send_logs_auto(e)
 
 
+
 @dp.message_handler(commands=['admin_logout'], state=FSMAdmin.admin)
 async def admin_logout(message: types.Message, state: FSMContext):
     """
@@ -62,7 +63,38 @@ async def admin_logout(message: types.Message, state: FSMContext):
         logger.error(f"admin_logout: {e}")
         await send_logs_auto(e)
 
+@dp.message_handler(commands=['send_logs_manually'], state=FSMAdmin.admin)
+async def send_logs_manually(message: types.Message):
+    """
+    Вручную отправляет логги. Логги отправляются в лс того, кто вызвал.
+
+    :param message: Сообщение, что выслал пользователь
+    :type message: aiogram.types.Message
+    """
+    try:
+        await message.answer(
+            'Отправляю логги...',
+        )
+
+        with open('main_log.log', 'rb') as log_file:
+            await bot.send_document(
+                chat_id=message.chat.id,
+                document=log_file)
+
+    except FileNotFoundError as e:
+        logger2.error(f"send_logs_manually: logs file is not found {e}")
+
+        # creating of logs file
+        with open('main_log.log', "w"):
+            pass
+
+        logger2.info(f"send_logs_manually: logs file created with the name 'main_log.log', because the upper Error {e}")
+
+    except Exception as e:
+        logger2.error(f"send_logs_manually: {e}")
+        await send_logs_auto(e)
 
 def register_handlers_admin(dp: Dispatcher):
     dp.register_message_handler(admin_login, commands=['admin_login'])
     dp.register_message_handler(admin_logout, commands=['admin_logout'], state=FSMAdmin.admin)
+    dp.register_message_handler(admin_logout, commands=['send_logs_manually'], state=FSMAdmin.admin)

@@ -3,6 +3,5 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 # keyboard for admin
 kb_admin = ReplyKeyboardMarkup(resize_keyboard=True)
 
-b_admin_logout = KeyboardButton('/admin_logout')
-
-kb_admin.add(b_admin_logout)
+kb_admin.add(KeyboardButton('/send_logs_manually'))
+kb_admin.add(KeyboardButton('/admin_logout'))
