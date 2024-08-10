@@ -14,12 +14,13 @@ import pickle
 class FSMClient(StatesGroup):
     pass
 
-@dp.message_handler(commands=['start', 'Перезапустить'])
+@dp.message_handler(commands=['start', 'Приветствие'])
 async def command_start(message: types.Message):
     await message.answer(
         f"""
-'Привет, я бот, который помогает с печатью. Просто скиньте мне ваши файлы.'
-/change_color_preset - Чтобы изменить цвет печати, сейчас выбрана {"цветная" if color_preset else "черно-белая"} печать.
+Привет, я бот, который помогает с печатью. Просто скиньте мне ваши файлы.
+Сейчас выбрана {"цветная" if color_preset else "черно-белая"} печать.
+/change_color_preset - Чтобы изменить цвет печати.
         """,
         reply_markup=kb_client
     )
@@ -64,5 +65,5 @@ async def set_color_preset(callback_query: types.CallbackQuery):
 
 
 def register_handlers_client(dp: Dispatcher):
-    dp.register_message_handler(command_start, commands=['start', 'Перезапустить'])
+    dp.register_message_handler(command_start, commands=['start', 'Приветствие'])
     dp.register_message_handler(ask_color_preset, commands=['Изменить_цвет_печати', 'change_color_preset'])
